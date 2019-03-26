@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+
+  customers-db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: customers
+    ports:
+      - 1234:5432

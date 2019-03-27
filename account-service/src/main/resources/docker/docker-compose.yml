@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+
+  accounts-db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: accounts
+    ports:
+      - 2345:5432

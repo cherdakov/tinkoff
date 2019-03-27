@@ -1,7 +1,8 @@
 package com.tinkoff.customerservice;
 
-import com.tinkoff.customerservice.entity.Customer;
+
 import com.tinkoff.customerservice.repository.CustomerRepository;
+import entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

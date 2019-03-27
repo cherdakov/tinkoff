@@ -6,6 +6,8 @@ import com.tinkoff.accountservice.AccountServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import entity.Account;
+
 import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.UUID;

@@ -1,7 +1,8 @@
 package com.tinkoff.customerservice.controller;
 
 import com.tinkoff.customerservice.CustomerService;
-import com.tinkoff.customerservice.entity.Customer;
+import com.tinkoff.customerservice.CustomerServiceException;
+import entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

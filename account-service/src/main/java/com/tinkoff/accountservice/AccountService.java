@@ -1,6 +1,6 @@
 package com.tinkoff.accountservice;
 
-import com.tinkoff.accountservice.entity.Account;
+import entity.Account;
 
 import java.util.List;
 import java.util.UUID;

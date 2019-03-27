@@ -1,6 +1,7 @@
 package com.tinkoff.customerservice;
 
-import com.tinkoff.customerservice.entity.Customer;
+
+import entity.Customer;
 
 import java.util.List;
 import java.util.UUID;

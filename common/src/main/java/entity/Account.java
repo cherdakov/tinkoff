@@ -1,4 +1,4 @@
-package com.tinkoff.accountservice.entity;
+package entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -43,4 +43,11 @@ public class Account {
     @Setter
     private long total;
 
+    public void debit(long amount){
+        this.total -= amount;
+    }
+
+    public void credit(long amount){
+        this.total += amount;
+    }
 }

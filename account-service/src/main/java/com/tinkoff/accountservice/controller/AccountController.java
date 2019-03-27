@@ -63,4 +63,20 @@ public class AccountController {
     public void deleteAccount(@PathParam("id") UUID id){
         accountService.deleteAccount(id);
     }
+
+    @RequestMapping(
+            value = {"/account/credit/{id}"},
+            method = {RequestMethod.POST}
+    )
+    public void creditAccount(@PathVariable("id") UUID id, @RequestParam long amount){
+        accountService.creditAccount(id, amount);
+    }
+
+    @RequestMapping(
+            value = {"/account/debit/{id}"},
+            method = {RequestMethod.POST}
+    )
+    public void debitAccount(@PathVariable("id") UUID id, @RequestParam long amount){
+        accountService.debitAccount(id, amount);
+    }
 }

@@ -50,4 +50,18 @@ public class AccountServiceImpl implements AccountService {
     public void deleteAccount(UUID id) {
         accountRepository.deleteById(id);
     }
+
+    @Override
+    public void creditAccount(UUID id, long amount) {
+        Account account = getAccount(id);
+        account.credit(amount);
+        updateAccount(account);
+    }
+
+    @Override
+    public void debitAccount(UUID id, long amount) {
+        Account account = getAccount(id);
+        account.debit(amount);
+        updateAccount(account);
+    }
 }

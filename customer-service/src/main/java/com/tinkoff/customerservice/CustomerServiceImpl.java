@@ -21,7 +21,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteCustomer(UUID id) {
+    public void deleteCustomer(UUID id) throws CustomerServiceException {
+        validateExists(id);
         customerRepository.deleteById(id);
     }
 
@@ -32,13 +33,23 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getCustomer(UUID id) {
+    public Customer getCustomer(UUID id) throws CustomerServiceException {
+        validateExists(id);
         Customer customer = customerRepository.getOne(id);
         return customer;
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
+    public void updateCustomer(Customer customer) throws CustomerServiceException {
+        if(customer.getId() == null){
+            throw new CustomerServiceException("Customer must have id for updating");
+        }
         customerRepository.save(customer);
+    }
+
+    private void validateExists(UUID id) throws CustomerServiceException {
+        if (!customerRepository.existsById(id)) {
+            throw new CustomerServiceException("Customer with id " + id + " doesn't exist");
+        }
     }
 }

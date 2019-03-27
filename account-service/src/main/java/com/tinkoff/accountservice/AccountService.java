@@ -10,15 +10,15 @@ public interface AccountService {
 
         List<Account> getAccounts(UUID ownerId);
 
-        Account getAccount(UUID id);
+        Account getAccount(UUID id) throws AccountServiceException;
 
-        void updateAccount(Account account);
+        void updateAccount(Account account) throws AccountServiceException;
 
         void addAccount(Account account);
 
-        void deleteAccount(UUID id);
+        void deleteAccount(UUID id) throws AccountServiceException;
 
-        void creditAccount(UUID id, long amount);
+        void creditAccount(UUID id, long amount) throws AccountServiceException;
 
-        void debitAccount(UUID id, long amount);
+        void debitAccount(UUID id, long amount) throws AccountServiceException;
 }

@@ -27,7 +27,7 @@ public class CustomerController {
             value = {"/customer/{id}"},
             method = {RequestMethod.GET}
     )
-    public Customer getCustomer(@PathVariable("id") UUID id){
+    public Customer getCustomer(@PathVariable("id") UUID id) throws CustomerServiceException {
         return customerService.getCustomer(id);
     }
 
@@ -35,7 +35,7 @@ public class CustomerController {
             value = {"/customer/{id}"},
             method = {RequestMethod.POST}
     )
-    public void updateCustomer(@PathVariable("id") UUID id, @RequestBody Customer customer){
+    public void updateCustomer(@PathVariable("id") UUID id, @RequestBody Customer customer) throws CustomerServiceException {
         customerService.updateCustomer(customer);
     }
 
@@ -51,7 +51,7 @@ public class CustomerController {
             value = {"/customer/{id}"},
             method = {RequestMethod.DELETE}
     )
-    public void deleteCustomer(@PathParam("id") UUID id){
+    public void deleteCustomer(@PathParam("id") UUID id) throws CustomerServiceException {
         customerService.deleteCustomer(id);
     }
 }

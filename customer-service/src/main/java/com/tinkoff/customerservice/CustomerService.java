@@ -9,11 +9,11 @@ public interface CustomerService {
 
     List<Customer> getCustomers();
 
-    void deleteCustomer(UUID id);
+    void deleteCustomer(UUID id) throws CustomerServiceException;
 
     Customer addCustomer(Customer customer);
 
-    Customer getCustomer(UUID id);
+    Customer getCustomer(UUID id) throws CustomerServiceException;
 
-    void updateCustomer(Customer customer);
+    void updateCustomer(Customer customer) throws CustomerServiceException;
 }

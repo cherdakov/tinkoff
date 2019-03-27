@@ -34,12 +34,16 @@ public class AccountServiceImpl implements AccountService {
         return accounts;
     }
 
-    public Account getAccount(UUID id) {
+    public Account getAccount(UUID id) throws AccountServiceException {
+        validateExist(id);
         Account account = accountRepository.getOne(id);
         return account;
     }
 
-    public void updateAccount(Account account) {
+    public void updateAccount(Account account) throws AccountServiceException {
+        if(account.getId() == null){
+            throw new AccountServiceException("Account must have id for updating");
+        }
         accountRepository.save(account);
     }
 
@@ -47,21 +51,28 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.save(account);
     }
 
-    public void deleteAccount(UUID id) {
+    public void deleteAccount(UUID id) throws AccountServiceException {
+        validateExist(id);
         accountRepository.deleteById(id);
     }
 
     @Override
-    public void creditAccount(UUID id, long amount) {
+    public void creditAccount(UUID id, long amount) throws AccountServiceException {
         Account account = getAccount(id);
         account.credit(amount);
         updateAccount(account);
     }
 
     @Override
-    public void debitAccount(UUID id, long amount) {
+    public void debitAccount(UUID id, long amount) throws AccountServiceException {
         Account account = getAccount(id);
         account.debit(amount);
         updateAccount(account);
+    }
+
+    private void validateExist(UUID id) throws AccountServiceException {
+        if (!accountRepository.existsById(id)) {
+            throw new AccountServiceException("Account with id " + id + " doesn't exist");
+        }
     }
 }

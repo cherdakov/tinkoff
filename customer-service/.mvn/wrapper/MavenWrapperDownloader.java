@@ -20,7 +20,7 @@ under the License.
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.IOCustomerServiceException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
@@ -68,14 +68,14 @@ public class MavenWrapperDownloader {
                 Properties mavenWrapperProperties = new Properties();
                 mavenWrapperProperties.load(mavenWrapperPropertyFileInputStream);
                 url = mavenWrapperProperties.getProperty(PROPERTY_NAME_WRAPPER_URL, url);
-            } catch (IOException e) {
+            } catch (IOCustomerServiceException e) {
                 System.out.println("- ERROR loading '" + MAVEN_WRAPPER_PROPERTIES_PATH + "'");
             } finally {
                 try {
                     if (mavenWrapperPropertyFileInputStream != null) {
                         mavenWrapperPropertyFileInputStream.close();
                     }
-                } catch (IOException e) {
+                } catch (IOCustomerServiceException e) {
                     // Ignore ...
                 }
             }
@@ -101,7 +101,7 @@ public class MavenWrapperDownloader {
         }
     }
 
-    private static void downloadFileFromURL(String urlString, File destination) throws Exception {
+    private static void downloadFileFromURL(String urlString, File destination) throws CustomerServiceException {
         URL website = new URL(urlString);
         ReadableByteChannel rbc;
         rbc = Channels.newChannel(website.openStream());

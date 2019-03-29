@@ -3,7 +3,7 @@ package client;
 import entity.Customer;
 import entity.ResponseData;
 import okhttp3.OkHttpClient;
-import repository.CustomerHttpRepository;
+import repository.customer.CustomerHttpRepository;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;

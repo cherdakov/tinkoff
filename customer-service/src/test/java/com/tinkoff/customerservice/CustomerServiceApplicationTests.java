@@ -1,6 +1,6 @@
 package com.tinkoff.customerservice;
 
-import com.tinkoff.customerservice.entity.Customer;
+import entity.Customer;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +27,7 @@ public class CustomerServiceApplicationTests {
     }
 
     @Test
-    public void crudTests() {
+    public void crudTests() throws CustomerServiceException {
 
         int count = customerService.getCustomers().size();
         Customer customer = getTestCustomer();

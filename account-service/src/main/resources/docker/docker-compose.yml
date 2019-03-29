@@ -9,3 +9,12 @@ services:
       POSTGRES_DB: accounts
     ports:
       - 2345:5432
+
+
+  customers-db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: customers
+    ports:
+      - 1234:5432

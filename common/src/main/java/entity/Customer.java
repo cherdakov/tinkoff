@@ -8,9 +8,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Table(
-        name = "customers"
-)
+@Table(name = "customers")
 @EntityListeners({AuditingEntityListener.class})
 public class Customer {
     @Id
@@ -19,10 +17,6 @@ public class Customer {
     )
     private UUID id;
     @NotBlank
-    @Column(
-            name = "name",
-            nullable = false
-    )
     private String name;
 
     Customer(String name) {

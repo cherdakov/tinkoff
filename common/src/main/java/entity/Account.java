@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
-
 @Entity
-@Table(name = "customers")
+@Component
+@Table(name = "accounts")
 @EntityListeners({AuditingEntityListener.class})
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,21 +24,10 @@ public class Account {
     private UUID id;
 
 
-    @NotBlank
-    @Column(
-            name = "owner",
-            nullable = false
-    )
     @Getter
     @Setter
     private UUID ownerId;
 
-
-    @NotBlank
-    @Column(
-            name = "total",
-            nullable = false
-    )
     @Getter
     @Setter
     private long total;

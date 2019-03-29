@@ -16,25 +16,24 @@ import java.util.UUID;
 public class CustomerServiceHttpClient {
     OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://localhost:1234/")
+            .baseUrl("http://localhost:8765/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient.build())
             .build();
+    private CustomerHttpRepository repository = retrofit.create(CustomerHttpRepository.class);
 
-    CustomerServiceHttpClient(){
+    public CustomerServiceHttpClient(){
 
     }
 
-    ResponseData<List<Customer>> getCustomers() throws IOException {
-        CustomerHttpRepository repository = retrofit.create(CustomerHttpRepository.class);
+    public ResponseData<List<Customer>> getCustomers() throws IOException {
         Call<ResponseData<List<Customer>>> call = repository.getCustomers();
         Response<ResponseData<List<Customer>>> response = call.execute();
         ResponseData<List<Customer>> responseData = response.body();
         return responseData;
     }
 
-    ResponseData<Customer> getCustomer(UUID id) throws IOException {
-        CustomerHttpRepository repository = retrofit.create(CustomerHttpRepository.class);
+    public ResponseData<Customer> getCustomer(UUID id) throws IOException {
         Call<ResponseData<Customer>> call = repository.getCustomer(id);
         Response<ResponseData<Customer>> response = call.execute();
         ResponseData<Customer> responseData = response.body();
@@ -54,7 +53,7 @@ public class CustomerServiceHttpClient {
 
     */
 
-    ResponseData<UUID> addCustomer(Customer customer) throws IOException {
+    public ResponseData<UUID> addCustomer(Customer customer) throws IOException {
         CustomerHttpRepository repository = retrofit.create(CustomerHttpRepository.class);
         Call<ResponseData<UUID>> call = repository.addCustomer(customer);
         Response<ResponseData<UUID>> response = call.execute();

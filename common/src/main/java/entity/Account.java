@@ -13,7 +13,6 @@ import java.util.UUID;
 @Entity
 @Component
 @Table(name = "accounts")
-@EntityListeners({AuditingEntityListener.class})
 @AllArgsConstructor
 @NoArgsConstructor
 public class Account {

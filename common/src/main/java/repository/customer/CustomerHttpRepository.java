@@ -2,7 +2,6 @@ package repository.customer;
 
 import entity.Customer;
 import entity.ResponseData;
-import org.springframework.stereotype.Repository;
 import retrofit2.Call;
 import retrofit2.http.*;
 

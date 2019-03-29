@@ -1,11 +1,10 @@
 package com.tinkoff.customerservice;
 
 
-import org.springframework.context.annotation.Bean;
-import repository.customer.CustomerRepository;
 import entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import repository.customer.CustomerRepository;
 
 import java.util.List;
 import java.util.UUID;

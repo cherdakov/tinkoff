@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class ResponseData<T> {
-    enum ResultCode{
+    public enum ResultCode{
         OK,
         ERROR
     }

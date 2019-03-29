@@ -2,19 +2,20 @@ package com.tinkoff.customerservice;
 
 
 import entity.Customer;
+import entity.ResponseData;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface CustomerService {
 
-    List<Customer> getCustomers();
+    ResponseData<List<Customer>> getCustomers();
 
-    void deleteCustomer(UUID id) throws CustomerServiceException;
+    ResponseData<UUID> deleteCustomer(UUID id) throws CustomerServiceException;
 
-    Customer addCustomer(Customer customer);
+    ResponseData<UUID> addCustomer(Customer customer);
 
-    Customer getCustomer(UUID id) throws CustomerServiceException;
+    ResponseData<Customer> getCustomer(UUID id) throws CustomerServiceException;
 
-    void updateCustomer(Customer customer) throws CustomerServiceException;
+    ResponseData<UUID> updateCustomer(Customer customer) throws CustomerServiceException;
 }

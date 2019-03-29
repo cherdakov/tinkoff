@@ -2,6 +2,7 @@ package com.tinkoff.customerservice;
 
 
 import entity.Customer;
+import entity.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.customer.CustomerRepository;
@@ -16,36 +17,39 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerRepository customerRepository;
 
     @Override
-    public List<Customer> getCustomers() {
+    public ResponseData<List<Customer>> getCustomers() {
         List<Customer> customers = customerRepository.findAll();
-        return customers;
+        return new ResponseData<>(customers, ResponseData.ResultCode.OK);
     }
 
     @Override
-    public void deleteCustomer(UUID id) throws CustomerServiceException {
+    public ResponseData<UUID> deleteCustomer(UUID id) throws CustomerServiceException {
+
         validateExists(id);
         customerRepository.deleteById(id);
+        return new ResponseData<>(id, ResponseData.ResultCode.OK);
     }
 
     @Override
-    public Customer addCustomer(Customer customer) {
+    public ResponseData<UUID> addCustomer(Customer customer) {
         Customer result = customerRepository.save(customer);
-        return result;
+        return new ResponseData<UUID>(result.getId(), ResponseData.ResultCode.OK);
     }
 
     @Override
-    public Customer getCustomer(UUID id) throws CustomerServiceException {
+    public ResponseData<Customer> getCustomer(UUID id) throws CustomerServiceException {
         validateExists(id);
         Customer customer = customerRepository.getOne(id);
-        return customer;
+        return new ResponseData<>(customer, ResponseData.ResultCode.OK);
     }
 
     @Override
-    public void updateCustomer(Customer customer) throws CustomerServiceException {
+    public ResponseData<UUID> updateCustomer(Customer customer) throws CustomerServiceException {
         if(customer.getId() == null){
             throw new CustomerServiceException("Customer must have id for updating");
         }
         customerRepository.save(customer);
+        return new ResponseData<>(customer.getId(), ResponseData.ResultCode.OK);
     }
 
     private void validateExists(UUID id) throws CustomerServiceException {

@@ -3,6 +3,7 @@ package com.tinkoff.accountservice.controller;
 
 import com.tinkoff.accountservice.AccountService;
 import com.tinkoff.accountservice.AccountServiceException;
+import entity.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class AccountController {
             value = {"/accounts"},
             method = {RequestMethod.GET}
     )
-    public List<Account> getAccounts(){
+    public ResponseData<List<Account>> getAccounts(){
         return accountService.getAccounts();
     }
 
@@ -30,7 +31,7 @@ public class AccountController {
             value = {"/accounts/{id}"},
             method = {RequestMethod.GET}
     )
-    public List<Account> getAccounts(UUID ownerId){
+    public ResponseData<List<Account>> getAccounts(@PathVariable("id") UUID ownerId){
         return accountService.getAccounts(ownerId);
     }
 
@@ -38,7 +39,7 @@ public class AccountController {
             value = {"/account/{id}"},
             method = {RequestMethod.GET}
     )
-    public Account getAccount(@PathVariable("id") UUID id) throws AccountServiceException {
+    public ResponseData<Account> getAccount(@PathVariable("id") UUID id) throws AccountServiceException {
         return accountService.getAccount(id);
     }
 
@@ -46,39 +47,39 @@ public class AccountController {
             value = {"/account/{id}"},
             method = {RequestMethod.POST}
     )
-    public void updateAccount(@PathVariable("id") UUID id, @RequestBody Account account) throws AccountServiceException {
-        accountService.updateAccount(account);
+    public ResponseData<UUID> updateAccount(@PathVariable("id") UUID id, @RequestBody Account account) throws AccountServiceException {
+        return accountService.updateAccount(account);
     }
 
     @RequestMapping(
             value = {"/accounts"},
             method = {RequestMethod.POST}
     )
-    public void addAccount(@RequestBody Account account){
-        accountService.addAccount(account);
+    public ResponseData<UUID> addAccount(@RequestBody Account account){
+        return accountService.addAccount(account);
     }
 
     @RequestMapping(
             value = {"/account/{id}"},
             method = {RequestMethod.DELETE}
     )
-    public void deleteAccount(@PathParam("id") UUID id) throws AccountServiceException {
-        accountService.deleteAccount(id);
+    public ResponseData<UUID> deleteAccount(@PathVariable("id") UUID id) throws AccountServiceException {
+        return accountService.deleteAccount(id);
     }
 
     @RequestMapping(
             value = {"/account/credit/{id}"},
             method = {RequestMethod.POST}
     )
-    public void creditAccount(@PathVariable("id") UUID id, @RequestParam long amount) throws AccountServiceException {
-        accountService.creditAccount(id, amount);
+    public ResponseData<UUID> creditAccount(@PathVariable("id") UUID id, @RequestParam long amount) throws AccountServiceException {
+        return accountService.creditAccount(id, amount);
     }
 
     @RequestMapping(
             value = {"/account/debit/{id}"},
             method = {RequestMethod.POST}
     )
-    public void debitAccount(@PathVariable("id") UUID id, @RequestParam long amount) throws AccountServiceException {
-        accountService.debitAccount(id, amount);
+    public ResponseData<UUID> debitAccount(@PathVariable("id") UUID id, @RequestParam long amount) throws AccountServiceException {
+        return accountService.debitAccount(id, amount);
     }
 }

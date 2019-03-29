@@ -1,6 +1,7 @@
 package com.tinkoff.accountservice;
 
 
+import entity.ResponseData;
 import repository.account.AccountRepository;
 import entity.Account;
 import org.slf4j.Logger;
@@ -25,55 +26,68 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     AccountRepository accountRepository;
 
-    public List<Account> getAccounts() {
-        List<Account> accounts = accountRepository.findAll();
-        return accounts;
-    }
-
-    public List<Account> getAccounts(UUID ownerId) {
-        List<Account> accounts = accountRepository.findAllByOwnerId(ownerId);
-        return accounts;
-    }
-
-    public Account getAccount(UUID id) throws AccountServiceException {
-        validateExist(id);
-        Account account = accountRepository.getOne(id);
-        return account;
-    }
-
-    public void updateAccount(Account account) throws AccountServiceException {
-        if(account.getId() == null){
-            throw new AccountServiceException("Account must have id for updating");
-        }
-        accountRepository.save(account);
-    }
-
-    public void addAccount(Account account) {
-        accountRepository.save(account);
-    }
-
-    public void deleteAccount(UUID id) throws AccountServiceException {
-        validateExist(id);
-        accountRepository.deleteById(id);
-    }
-
-    @Override
-    public void creditAccount(UUID id, long amount) throws AccountServiceException {
-        Account account = getAccount(id);
-        account.credit(amount);
-        updateAccount(account);
-    }
-
-    @Override
-    public void debitAccount(UUID id, long amount) throws AccountServiceException {
-        Account account = getAccount(id);
-        account.debit(amount);
-        updateAccount(account);
-    }
 
     private void validateExist(UUID id) throws AccountServiceException {
         if (!accountRepository.existsById(id)) {
             throw new AccountServiceException("Account with id " + id + " doesn't exist");
         }
     }
+
+    @Override
+    public ResponseData<List<Account>> getAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+        return new ResponseData<>(accounts, ResponseData.ResultCode.OK);
+    }
+
+    @Override
+    public ResponseData<List<Account>> getAccounts(UUID ownerId) {
+        List<Account> accounts = accountRepository.findAllByOwnerId(ownerId);
+        return new ResponseData<>(accounts, ResponseData.ResultCode.OK);
+    }
+
+    @Override
+    public ResponseData<Account> getAccount(UUID id) throws AccountServiceException {
+        validateExist(id);
+        Account account = accountRepository.getOne(id);
+        return new ResponseData<>(account, ResponseData.ResultCode.OK);
+    }
+
+    @Override
+    public ResponseData<UUID> updateAccount(Account account) throws AccountServiceException {
+        if(account.getId() == null){
+            throw new AccountServiceException("Account must have id for updating");
+        }
+        accountRepository.save(account);
+        return new ResponseData<>(account.getId(), ResponseData.ResultCode.OK);
+    }
+
+    @Override
+    public ResponseData<UUID> addAccount(Account account) {
+        accountRepository.save(account);
+        return new ResponseData<>(account.getId(), ResponseData.ResultCode.OK);
+    }
+
+    @Override
+    public ResponseData<UUID> deleteAccount(UUID id) throws AccountServiceException {
+        validateExist(id);
+        accountRepository.deleteById(id);
+        return new ResponseData<>(id, ResponseData.ResultCode.OK);
+    }
+
+    @Override
+    public ResponseData<UUID> creditAccount(UUID id, long amount) throws AccountServiceException {
+        Account account = getAccount(id).getData();
+        account.credit(amount);
+        updateAccount(account);
+        return new ResponseData<>(id, ResponseData.ResultCode.OK);
+    }
+
+    @Override
+    public ResponseData<UUID> debitAccount(UUID id, long amount) throws AccountServiceException {
+        Account account = getAccount(id).getData();
+        account.debit(amount);
+        updateAccount(account);
+        return new ResponseData<>(id, ResponseData.ResultCode.OK);
+    }
+
 }

@@ -3,6 +3,7 @@ package com.tinkoff.customerservice.controller;
 import com.tinkoff.customerservice.CustomerService;
 import com.tinkoff.customerservice.CustomerServiceException;
 import entity.Customer;
+import entity.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class CustomerController {
             value = {"/customers"},
             method = {RequestMethod.GET}
     )
-    public List<Customer> getCustomers(){
+    public ResponseData<List<Customer>> getCustomers(){
         return customerService.getCustomers();
     }
 
@@ -28,7 +29,7 @@ public class CustomerController {
             value = {"/customer/{id}"},
             method = {RequestMethod.GET}
     )
-    public Customer getCustomer(@PathVariable("id") UUID id) throws CustomerServiceException {
+    public ResponseData<Customer> getCustomer(@PathVariable("id") UUID id) throws CustomerServiceException {
         return customerService.getCustomer(id);
     }
 
@@ -36,23 +37,23 @@ public class CustomerController {
             value = {"/customer/{id}"},
             method = {RequestMethod.POST}
     )
-    public void updateCustomer(@PathVariable("id") UUID id, @RequestBody Customer customer) throws CustomerServiceException {
-        customerService.updateCustomer(customer);
+    public ResponseData<UUID> updateCustomer(@PathVariable("id") UUID id, @RequestBody Customer customer) throws CustomerServiceException {
+        return customerService.updateCustomer(customer);
     }
 
     @RequestMapping(
             value = {"/customers"},
             method = {RequestMethod.POST}
     )
-    public void addCustomer(@RequestBody Customer customer){
-        customerService.addCustomer(customer);
+    public ResponseData<UUID> addCustomer(@RequestBody Customer customer){
+        return customerService.addCustomer(customer);
     }
 
     @RequestMapping(
             value = {"/customer/{id}"},
             method = {RequestMethod.DELETE}
     )
-    public void deleteCustomer(@PathParam("id") UUID id) throws CustomerServiceException {
-        customerService.deleteCustomer(id);
+    public ResponseData<UUID> deleteCustomer(@PathParam("id") UUID id) throws CustomerServiceException {
+        return customerService.deleteCustomer(id);
     }
 }

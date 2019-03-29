@@ -1,24 +1,25 @@
 package com.tinkoff.accountservice;
 
 import entity.Account;
+import entity.ResponseData;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface AccountService {
-        List<Account> getAccounts();
+        ResponseData<List<Account>> getAccounts();
 
-        List<Account> getAccounts(UUID ownerId);
+        ResponseData<List<Account>> getAccounts(UUID ownerId);
 
-        Account getAccount(UUID id) throws AccountServiceException;
+        ResponseData<Account> getAccount(UUID id) throws AccountServiceException;
 
-        void updateAccount(Account account) throws AccountServiceException;
+        ResponseData<UUID> updateAccount(Account account) throws AccountServiceException;
 
-        void addAccount(Account account);
+        ResponseData<UUID> addAccount(Account account);
 
-        void deleteAccount(UUID id) throws AccountServiceException;
+        ResponseData<UUID> deleteAccount(UUID id) throws AccountServiceException;
 
-        void creditAccount(UUID id, long amount) throws AccountServiceException;
+        ResponseData<UUID> creditAccount(UUID id, long amount) throws AccountServiceException;
 
-        void debitAccount(UUID id, long amount) throws AccountServiceException;
+        ResponseData<UUID> debitAccount(UUID id, long amount) throws AccountServiceException;
 }

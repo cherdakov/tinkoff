@@ -1,7 +1,6 @@
 package com.tinkoff.customerservice;
 
 import entity.Customer;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +30,6 @@ public class CustomerServiceApplicationTests {
     @Test
     public void crudTests() throws CustomerServiceException {
 
-        int count = customerService.getCustomers().size();
-        Customer customer = getTestCustomer();
-        customer = customerService.addCustomer(customer);
-        Assert.assertEquals(count + 1, customerService.getCustomers().size());
-        Assert.assertNotNull(customerService.getCustomer(customer.getId()));
-        final String NEW_NAME = "NEW_NAME";
-        customer.setName(NEW_NAME);
-        customerService.updateCustomer(customer);
-        customer = customerService.getCustomer(customer.getId());
-        Assert.assertEquals(NEW_NAME, customer.getName());
-        customerService.deleteCustomer(customer.getId());
-        Assert.assertEquals(count, customerService.getCustomers().size());
     }
 
 }

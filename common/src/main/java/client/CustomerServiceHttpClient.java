@@ -40,22 +40,22 @@ public class CustomerServiceHttpClient {
         return responseData;
     }
 
-    /*
+    public ResponseData<UUID> updateCustomer(Customer customer) throws IOException {
+        Call<ResponseData<UUID>> call = repository.addCustomer(customer);
+        Response<ResponseData<UUID>> response = call.execute();
+        ResponseData<UUID> responseData = response.body();
+        return responseData;
+    }
 
-    @POST("/customer/{id}")
-    Call<ResponseData<String>> updateCustomer(@Path("id") UUID id);
-
-    @POST("/customers")
-    Call<ResponseData<UUID>> addCustomer(@Body Customer customer);
-
-    @DELETE("/customer/{id}")
-    Call<ResponseData<String>> deleteCustomer(@Path("id") UUID id);
-
-    */
+    public ResponseData<UUID> deleteCustomer(UUID id) throws IOException {
+        Call<ResponseData<UUID>> call = repository.deleteCustomer(id);
+        Response<ResponseData<UUID>> response = call.execute();
+        ResponseData<UUID> responseData = response.body();
+        return responseData;
+    }
 
     public ResponseData<UUID> addCustomer(Customer customer) throws IOException {
-        CustomerHttpRepository repository = retrofit.create(CustomerHttpRepository.class);
-        Call<ResponseData<UUID>> call = repository.addCustomer(customer);
+        Call<ResponseData<UUID>> call = repository.updateCustomer(customer.getId(), customer);
         Response<ResponseData<UUID>> response = call.execute();
         ResponseData<UUID> responseData = response.body();
         return responseData;

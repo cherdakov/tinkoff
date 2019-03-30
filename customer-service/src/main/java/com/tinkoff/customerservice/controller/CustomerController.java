@@ -45,7 +45,7 @@ public class CustomerController {
             value = {"/customers"},
             method = {RequestMethod.POST}
     )
-    public ResponseData<UUID> addCustomer(@RequestBody Customer customer){
+    public ResponseData<UUID> addCustomer(@RequestBody Customer customer) throws CustomerServiceException {
         return customerService.addCustomer(customer);
     }
 
@@ -53,7 +53,7 @@ public class CustomerController {
             value = {"/customer/{id}"},
             method = {RequestMethod.DELETE}
     )
-    public ResponseData<UUID> deleteCustomer(@PathParam("id") UUID id) throws CustomerServiceException {
+    public ResponseData<UUID> deleteCustomer(@PathVariable("id") UUID id) throws CustomerServiceException {
         return customerService.deleteCustomer(id);
     }
 }

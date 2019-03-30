@@ -13,7 +13,7 @@ public interface CustomerService {
 
     ResponseData<UUID> deleteCustomer(UUID id) throws CustomerServiceException;
 
-    ResponseData<UUID> addCustomer(Customer customer);
+    ResponseData<UUID> addCustomer(Customer customer) throws CustomerServiceException;
 
     ResponseData<Customer> getCustomer(UUID id) throws CustomerServiceException;
 

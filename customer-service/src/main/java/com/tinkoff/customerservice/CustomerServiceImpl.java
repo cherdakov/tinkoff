@@ -31,9 +31,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public ResponseData<UUID> addCustomer(Customer customer) {
+    public ResponseData<UUID> addCustomer(Customer customer) throws CustomerServiceException {
+        if(customer.getId()!=null){
+            throw new CustomerServiceException("Customer must haven't id for creating");
+        }
         Customer result = customerRepository.save(customer);
-        return new ResponseData<UUID>(result.getId(), ResponseData.ResultCode.OK);
+        return new ResponseData<>(result.getId(), ResponseData.ResultCode.OK);
     }
 
     @Override

@@ -55,7 +55,7 @@ public class CustomerServiceHttpClient {
     }
 
     public ResponseData<UUID> addCustomer(Customer customer) throws IOException {
-        Call<ResponseData<UUID>> call = repository.updateCustomer(customer.getId(), customer);
+        Call<ResponseData<UUID>> call = repository.addCustomer(customer);
         Response<ResponseData<UUID>> response = call.execute();
         ResponseData<UUID> responseData = response.body();
         return responseData;

@@ -3,6 +3,7 @@ package client;
 import entity.Customer;
 import entity.ResponseData;
 import okhttp3.OkHttpClient;
+import org.springframework.stereotype.Component;
 import repository.customer.CustomerHttpRepository;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+@Component
 public class CustomerServiceHttpClient {
     OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     Retrofit retrofit = new Retrofit.Builder()

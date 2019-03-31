@@ -1,15 +1,12 @@
 package com.tinkoff.accountservice.controller;
 
-
 import com.tinkoff.accountservice.AccountService;
 import com.tinkoff.accountservice.AccountServiceException;
+import entity.Account;
 import entity.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import entity.Account;
-
-import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.UUID;
 
@@ -68,7 +65,7 @@ public class AccountController {
     }
 
     @RequestMapping(
-            value = {"/account/credit/{id}"},
+            value = {"/account/{id}/credit"},
             method = {RequestMethod.POST}
     )
     public ResponseData<UUID> creditAccount(@PathVariable("id") UUID id, @RequestParam long amount) throws AccountServiceException {
@@ -76,7 +73,7 @@ public class AccountController {
     }
 
     @RequestMapping(
-            value = {"/account/debit/{id}"},
+            value = {"/account/{id}/debit"},
             method = {RequestMethod.POST}
     )
     public ResponseData<UUID> debitAccount(@PathVariable("id") UUID id, @RequestParam long amount) throws AccountServiceException {

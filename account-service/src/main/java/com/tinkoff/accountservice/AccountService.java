@@ -3,6 +3,7 @@ package com.tinkoff.accountservice;
 import entity.Account;
 import entity.ResponseData;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ public interface AccountService {
 
         ResponseData<UUID> updateAccount(Account account) throws AccountServiceException;
 
-        ResponseData<UUID> addAccount(Account account);
+        ResponseData<UUID> addAccount(Account account) throws IOException;
 
         ResponseData<UUID> deleteAccount(UUID id) throws AccountServiceException;
 

@@ -1,11 +1,18 @@
 package com.tinkoff.accountservice;
 
+import entity.ResultCode;
+
 public class AccountServiceException extends Exception {
-    public AccountServiceException() {
+
+    ResultCode resultCode = ResultCode.UNDEFINED;
+
+    public AccountServiceException(ResultCode resultCode) {
+        this.resultCode = resultCode;
     }
 
-    public AccountServiceException(String message) {
+    public AccountServiceException(String message, ResultCode resultCode) {
         super(message);
+        this.resultCode = resultCode;
     }
 
     public AccountServiceException(String message, Throwable cause) {

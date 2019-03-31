@@ -1,10 +1,17 @@
 package com.tinkoff.customerservice;
 
+import entity.ResponseData;
+import entity.ResultCode;
+
 public class CustomerServiceException extends Exception {
-    public CustomerServiceException() {
+
+    ResultCode resultCode = ResultCode.UNDEFINED;
+
+    public CustomerServiceException(ResultCode resultCode) {
+        this.resultCode = resultCode;
     }
 
-    public CustomerServiceException(String message) {
+    public CustomerServiceException(String message, ResultCode resultCode) {
         super(message);
     }
 
@@ -18,5 +25,9 @@ public class CustomerServiceException extends Exception {
 
     public CustomerServiceException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    public ResultCode getResultCode() {
+        return resultCode;
     }
 }

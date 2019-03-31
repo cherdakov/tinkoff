@@ -53,7 +53,7 @@ public class AccountController {
             value = {"/accounts"},
             method = {RequestMethod.POST}
     )
-    public ResponseData<UUID> addAccount(@RequestBody Account account) throws IOException {
+    public ResponseData<UUID> addAccount(@RequestBody Account account) throws IOException, AccountServiceException {
         return accountService.addAccount(account);
     }
 

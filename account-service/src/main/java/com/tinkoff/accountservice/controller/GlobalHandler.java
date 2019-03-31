@@ -16,21 +16,21 @@ public class GlobalHandler {
     @ExceptionHandler(AccountServiceException.class)
     @ResponseBody
     ResponseData handleException(AccountServiceException e) {
-        log.error("", e);
-        return new ResponseData<>(ResultCode.ERROR, e.getMessage());
+        log.error("", e.getMessage());
+        return new ResponseData<>(e.getResultCode(), e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
     ResponseData handleException(Exception e) {
-        log.error("", e);
+        log.error("", e.getMessage());
         return new ResponseData<>(ResultCode.ERROR, e.getMessage());
     }
 
     @ExceptionHandler(IOException.class)
     @ResponseBody
     ResponseData handleException(IOException e) {
-        log.error("", e);
+        log.error("", e.getMessage());
         return new ResponseData<>(ResultCode.ERROR,
                 "Something wrong with inner http: " + e.getMessage());
     }

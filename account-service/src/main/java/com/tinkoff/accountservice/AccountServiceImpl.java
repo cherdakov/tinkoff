@@ -67,7 +67,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public ResponseData<UUID> addAccount(Account account) throws IOException {
+    public ResponseData<UUID> addAccount(Account account) throws IOException, AccountServiceException {
+        validateOwnerExists(account.getOwnerId());
         accountRepository.save(account);
         return new ResponseData<>(account.getId(), ResultCode.OK);
     }

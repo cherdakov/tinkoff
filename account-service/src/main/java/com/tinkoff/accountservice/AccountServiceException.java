@@ -4,6 +4,10 @@ import entity.ResultCode;
 
 public class AccountServiceException extends Exception {
 
+    public ResultCode getResultCode() {
+        return resultCode;
+    }
+
     ResultCode resultCode = ResultCode.UNDEFINED;
 
     public AccountServiceException(ResultCode resultCode) {

@@ -13,6 +13,7 @@ public class CustomerServiceException extends Exception {
 
     public CustomerServiceException(String message, ResultCode resultCode) {
         super(message);
+        this.resultCode = resultCode;
     }
 
     public CustomerServiceException(String message, Throwable cause) {

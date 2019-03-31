@@ -16,7 +16,7 @@ public interface AccountService {
 
         ResponseData<UUID> updateAccount(Account account) throws AccountServiceException;
 
-        ResponseData<UUID> addAccount(Account account) throws IOException;
+        ResponseData<UUID> addAccount(Account account) throws IOException, AccountServiceException;
 
         ResponseData<UUID> deleteAccount(UUID id) throws AccountServiceException;
 
